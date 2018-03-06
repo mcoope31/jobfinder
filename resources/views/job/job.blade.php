@@ -34,13 +34,7 @@
             </p>
             <p style="font-size:1.5em;">
                 <span class="badge badge-secondary">{{ $job->type }}</span>
-                <span class="badge badge-secondary">Education: 
-                    @if($job->education == 0)
-                        Not Necessary
-                    @else
-                        {{ $job->education_level->education }}
-                    @endif
-                </span>
+                <span class="badge badge-secondary">Education: {{ $job->education }}</span>
                 <span class="badge badge-secondary">Experience: {{ $job->experience }}</span>
             </p>
             <p>
@@ -103,6 +97,10 @@
                 @else
                     <h3><span class="badge badge-success pull-right">You have applied to this Job!</span></h3>
                 @endif
+            @elseif(!auth()->check())
+                <div class="form-group">
+                    <a href="{{ url('/login') }}" class="btn btn-success btn-block">Sign up to Apply</a>
+                </div>
             @endif
         </div>
         
