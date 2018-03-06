@@ -72,13 +72,6 @@
                         <input type="text" class="form-control" name="city" id="city" value='{{ Auth::user()->type->city }}' required>
                     </div>
                 </div>
-                
-                <div class="form-group row">
-                    <label for="state" class="col-sm-3 col-form-label">State: </label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" name="state" id="state" value='{{ Auth::user()->type->state }}' required>
-                    </div>
-                </div>
 				
 				<div class="form-group row">
                     <label for="state" class="col-sm-3 col-form-label">State: </label>
