@@ -3,16 +3,15 @@
 @section('content')
 
 <?php
-        $new_users = [];
-        $new_users_header = "";
+        $new_users = $new_seekers;
+        $new_users_header = "Newest Job Seekers";
         $not_auth_or_is_seeker = false;
+        $img_src_path = '/storage/seeker_images/seeker';
         if(!auth()->check() || auth()->user()->user_type == 1){
             $new_users = $new_companies;
             $new_users_header = "Newest Companies";
             $not_auth_or_is_seeker = true;
-        } else {
-            $new_users = $new_seekers;
-            $new_users_header = "Newest Job Seekers";
+            $img_src_path = '/storage/company_images/company';
         }
 ?>
 
@@ -40,9 +39,15 @@
                             <li class="list-group-item">
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <?php $img_src = '/storage/seeker_images/seeker'.$user->user_id.'.png'; ?>
-                                        @if(file_exists(public_path($img_src)))
-                                            <img style="width:100px;height:100px;" src="{{$img_src}}?={{ File::lastModified(public_path().'/'.$img_src) }}">
+
+                                        <?php
+                                        $img_src_png = $img_src_path.$user->user_id.'.png';
+                                        $img_src_jpg = $img_src_path.$user->user_id.'.jpg';
+                                        ?>
+                                        @if(file_exists(public_path($img_src_png)))
+                                            <img style="width:100px;height:100px;" id='img-upload' src="{{$img_src_png}}?={{ File::lastModified(public_path().'/'.$img_src_png) }}">
+                                        @elseif(file_exists(public_path($img_src_jpg)))
+                                            <img style="width:100px;height:100px;" id='img-upload' src="{{$img_src_jpg}}?={{ File::lastModified(public_path().'/'.$img_src_jpg) }}">
                                         @elseif($not_auth_or_is_seeker)
                                             <img style="width:100px;height:100px;" src='/storage/company_images/noimage.png'>
                                         @else
