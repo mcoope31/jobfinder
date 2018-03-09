@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Application;
 use App\JobOpening;
 use App\User;
+use App\Seeker;
 
 class DashboardController extends Controller
 {
@@ -26,7 +27,14 @@ class DashboardController extends Controller
         }
         else if(auth()->user()->user_type == 2)
         {
-            return view('company.dashboard');
+            $new_seekers = Seeker::latest()->limit(10)->get();
+            $job_skills = \DB::table('job_skills')
+                ->join('skills', 'job_skills.skill_id','=','skills.id')
+                ->selectRaw('skill_id,name,category,AVG(rating) AS average_rating, COUNT(job_id) as num_seekers')
+                ->whereRaw('job_skills.skill_id=skills.id')
+                ->groupBy('skill_id','name','category')
+                ->orderByRaw('average_rating DESC')->get();
+            return view('company.dashboard', compact('new_seekers', 'job_skills'));
         }
         else if(auth()->user()->user_type == 3)
         {
