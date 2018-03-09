@@ -55,9 +55,14 @@
                             <li class="list-group-item">
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <?php $img_src = '/storage/company_images/company'.$job->company->user_id.'.png'; ?>
-                                        @if(file_exists(public_path($img_src)))
-                                            <img style="width:80px;height:80px;" src="{{$img_src}}?={{ File::lastModified(public_path().'/'.$img_src) }}">
+                                        <?php
+                                        $img_src_png = '/storage/company_images/company'.$job->company->user_id.'.png';
+                                        $img_src_jpg = '/storage/company_images/company'.$job->company->user_id.'.jpg';
+                                        ?>
+                                        @if(file_exists(public_path($img_src_png)))
+                                            <img style="width:80px;height:80px;" src="{{$img_src_png}}?={{ File::lastModified(public_path().'/'.$img_src_png) }}">
+                                        @elseif(file_exists(public_path($img_src_jpg)))
+                                            <img style="width:80px;height:80px;" src="{{$img_src_jpg}}?={{ File::lastModified(public_path().'/'.$img_src_jpg) }}">
                                         @else
                                             <img style='width:80px;height:80px;' src='/storage/company_images/noimage.png'>
                                         @endif
