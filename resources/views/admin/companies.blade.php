@@ -22,9 +22,9 @@
                                 $img_src_jpg = '/storage/company_images/company'.$company->user_id.'.jpg';
                                 ?>
                                 @if(file_exists(public_path($img_src_png)))
-                                    <img style="width:120px;height:120px;" src="{{$img_src_png}}?={{ File::lastModified(public_path().'/'.$img_src_png) }}">
+                                    <img style="width:120px;height:120px;margin:0 auto;display:block;" src="{{$img_src_png}}?={{ File::lastModified(public_path().'/'.$img_src_png) }}">
                                 @elseif(file_exists(public_path($img_src_jpg)))
-                                    <img style="width:120px;height:120px;" src="{{$img_src_jpg}}?={{ File::lastModified(public_path().'/'.$img_src_jpg) }}">
+                                    <img style="width:120px;height:120px;margin:0 auto;display:block;" src="{{$img_src_jpg}}?={{ File::lastModified(public_path().'/'.$img_src_jpg) }}">
                                 @else
                                     <img style='width:120px;height:120px;margin:0 auto;display:block;' src='/storage/company_images/noimage.png'>
                                 @endif

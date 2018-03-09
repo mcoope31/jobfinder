@@ -16,9 +16,9 @@
                                 $img_src_jpg = '/storage/seeker_images/seeker'.$seeker->user_id.'.jpg';
                                 ?>
                                 @if(file_exists(public_path($img_src_png)))
-                                    <img style="width:120px;height:120px;" id='img-upload' src="{{$img_src_png}}?={{ File::lastModified(public_path().'/'.$img_src_png) }}">
+                                    <img style="width:120px;height:120px;margin:0 auto;display:block;" id='img-upload' src="{{$img_src_png}}?={{ File::lastModified(public_path().'/'.$img_src_png) }}">
                                 @elseif(file_exists(public_path($img_src_jpg)))
-                                    <img style="width:120px;height:120px;" id='img-upload' src="{{$img_src_jpg}}?={{ File::lastModified(public_path().'/'.$img_src_jpg) }}">
+                                    <img style="width:120px;height:120px;margin:0 auto;display:block;" id='img-upload' src="{{$img_src_jpg}}?={{ File::lastModified(public_path().'/'.$img_src_jpg) }}">
                                 @else
                                     <img style='width:120px;height:120px;margin:0 auto;display:block;' src='/storage/seeker_images/noimage.png'>
                                 @endif
