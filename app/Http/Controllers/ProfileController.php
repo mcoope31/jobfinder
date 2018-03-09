@@ -106,11 +106,11 @@ class ProfileController extends Controller
         {
             //VALIDATE
             $request->validate([
-                'name' => 'required|min:1|max:100',
-                'age' => 'required|numeric|min:10|max:100',
-                'city' => 'required|min:1|max:100',
-                'state' => 'required|min:1|max:100',
-                'zip' => 'required|min:5|max:15'
+                'name' => 'required|alpha_dash|min:1|max:100',
+                'age' => 'required|numeric|min:16',
+                'city' => 'required|alpha_dash|min:3|max:100',
+                'state' => 'required|alpha|min:3|max:100',
+                'zip' => 'required|numeric|digits:5'
             ]);
             
             //STORE IMAGE
@@ -134,16 +134,16 @@ class ProfileController extends Controller
             //VALIDATE
             $request->validate([
                 'name' => 'required|min:1|max:100',
-                'industry' => 'required|min:1|max:100',
+                'industry' => 'required',
                 'description' => 'required|min:1|max:1000',
-                'phone' => 'required',
-                'contact_email' => 'nullable|email',
+                'phone' => 'required|digits:10',
+                'contact_email' => 'nullable|email|unique:email',
                 'founded' => 'required|digits:4',
                 'company_size' => 'required|numeric|min:1',
-                'city' => 'required|min:1|max:100',
-                'state' => 'required|min:1|max:100',
-                'zip' => 'required|min:5|max:15',
-                'website' => 'nullable|max:100'
+                'city' => 'required|alpha_dash|min:1|max:100',
+                'state' => 'required|alpha|min:1|max:100',
+                'zip' => 'required|digits:6',
+                'website' => 'nullable|URL|max:100'
             ]);
             
             //STORE IMAGE

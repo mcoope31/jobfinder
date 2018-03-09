@@ -77,11 +77,62 @@
                         <input type="text" class="form-control" name="city" id="city" value='{{ Auth::user()->type->city }}' required>
                     </div>
                 </div>
-                
-                <div class="form-group row">
+				
+				<div class="form-group row">
                     <label for="state" class="col-sm-3 col-form-label">State: </label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="state" id="state" value='{{ Auth::user()->type->state }}' required>
+                        <select class="form-control" id="state" name="state">
+                            <option {{ (auth()->user()->type->state=="Alabama")?'selected':'' }}>Alabama</option>
+                            <option {{ (auth()->user()->type->state=="Alaska")?'selected':'' }}>Alaska</option>
+                            <option {{ (auth()->user()->type->state=="Arizona")?'selected':'' }}>Arizona</option>
+                            <option {{ (auth()->user()->type->state=="Arkansas")?'selected':'' }}>Arkansas</option>
+                            <option {{ (auth()->user()->type->state=="California")?'selected':'' }}>California</option>
+                            <option {{ (auth()->user()->type->state=="Colorado")?'selected':'' }}>Colorado</option>
+                            <option {{ (auth()->user()->type->state=="Connecticut")?'selected':'' }}>Connecticut</option>
+                            <option {{ (auth()->user()->type->state=="Delaware")?'selected':'' }}>Delaware</option>
+                            <option {{ (auth()->user()->type->state=="Florida")?'selected':'' }}>Florida</option>
+                            <option {{ (auth()->user()->type->state=="Georgia")?'selected':'' }}>Georgia</option>
+                            <option {{ (auth()->user()->type->state=="Hawaii")?'selected':'' }}>Hawaii</option>
+                            <option {{ (auth()->user()->type->state=="Idaho")?'selected':'' }}>Idaho</option>
+                            <option {{ (auth()->user()->type->state=="Illinois")?'selected':'' }}>Illinois</option>
+                            <option {{ (auth()->user()->type->state=="Indiana")?'selected':'' }}>Indiana</option>
+                            <option {{ (auth()->user()->type->state=="Iowa")?'selected':'' }}>Iowa</option>
+                            <option {{ (auth()->user()->type->state=="Kansas")?'selected':'' }}>Kansas</option>
+                            <option {{ (auth()->user()->type->state=="Kentucky")?'selected':'' }}>Kentucky</option>
+                            <option {{ (auth()->user()->type->state=="Louisiana")?'selected':'' }}>Louisiana</option>
+                            <option {{ (auth()->user()->type->state=="Maine")?'selected':'' }}>Maine</option>
+                            <option {{ (auth()->user()->type->state=="Maryland")?'selected':'' }}>Maryland</option>
+                            <option {{ (auth()->user()->type->state=="Massachusetts")?'selected':'' }}>Massachusetts</option>
+                            <option {{ (auth()->user()->type->state=="Michigan")?'selected':'' }}>Michigan</option>
+                            <option {{ (auth()->user()->type->state=="Minnesota")?'selected':'' }}>Minnesota</option>
+                            <option {{ (auth()->user()->type->state=="Mississippi")?'selected':'' }}>Mississippi</option>
+                            <option {{ (auth()->user()->type->state=="Missouri")?'selected':'' }}>Missouri</option>
+                            <option {{ (auth()->user()->type->state=="Montana")?'selected':'' }}>Montana</option>
+                            <option {{ (auth()->user()->type->state=="Nebraska")?'selected':'' }}>Nebraska</option>
+                            <option {{ (auth()->user()->type->state=="Nevada")?'selected':'' }}>Nevada</option>
+                            <option {{ (auth()->user()->type->state=="New Hampshire")?'selected':'' }}>New Hampshire</option>
+                            <option {{ (auth()->user()->type->state=="New Jersey")?'selected':'' }}>New Jersey</option>
+                            <option {{ (auth()->user()->type->state=="New Mexico")?'selected':'' }}>New Mexico</option>
+                            <option {{ (auth()->user()->type->state=="New York")?'selected':'' }}>New York</option>
+                            <option {{ (auth()->user()->type->state=="North Carolina")?'selected':'' }}>North Carolina</option>
+                            <option {{ (auth()->user()->type->state=="North Dakota")?'selected':'' }}>North Dakota</option>
+                            <option {{ (auth()->user()->type->state=="Ohio")?'selected':'' }}>Ohio</option>
+                            <option {{ (auth()->user()->type->state=="Oklahoma")?'selected':'' }}>Oklahoma</option>
+                            <option {{ (auth()->user()->type->state=="Oregon")?'selected':'' }}>Oregon</option>
+                            <option {{ (auth()->user()->type->state=="Pennysylvania")?'selected':'' }}>Pennysylvania</option>
+                            <option {{ (auth()->user()->type->state=="Rhode Island")?'selected':'' }}>Rhode Island</option>
+                            <option {{ (auth()->user()->type->state=="South Carolina")?'selected':'' }}>South Carolina</option>
+                            <option {{ (auth()->user()->type->state=="South Dakota")?'selected':'' }}>South Dakota</option>
+                            <option {{ (auth()->user()->type->state=="Tennessee")?'selected':'' }}>Tennessee</option>
+                            <option {{ (auth()->user()->type->state=="Texas")?'selected':'' }}>Texas</option>
+                            <option {{ (auth()->user()->type->state=="Utah")?'selected':'' }}>Utah</option>
+                            <option {{ (auth()->user()->type->state=="Vermont")?'selected':'' }}>Vermont</option>
+                            <option {{ (auth()->user()->type->state=="Virginia")?'selected':'' }}>Virginia</option>
+                            <option {{ (auth()->user()->type->state=="Washington")?'selected':'' }}>Washington</option>
+                            <option {{ (auth()->user()->type->state=="West Virginia")?'selected':'' }}>West Virginia</option>
+                            <option {{ (auth()->user()->type->state=="Wisconsin")?'selected':'' }}>Wisconsin</option>
+                            <option {{ (auth()->user()->type->state=="Wyoming")?'selected':'' }}>Wyoming</option>						
+                        </select>
                     </div>
                 </div>
                 
