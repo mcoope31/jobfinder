@@ -54,6 +54,12 @@ Route::delete('/profile/{user_id}/education/{education_id}/delete', 'ProfileCont
 
 Route::get('/profile/{user_id}/account', 'ProfileController@account');
 
+Route::get('/profile/{user_id}/edit_account', 'ProfileController@edit_account');
+
+Route::patch('/profile/{user_id}/edit_account_email', 'ProfileController@update_account_email');
+
+Route::patch('/profile/{user_id}/edit_account_password', 'ProfileController@update_account_password');
+
 
 /*
  *      DASHBOARD ROUTES
