@@ -11,9 +11,14 @@
                 <li class="list-group-item">
                     <div class="row">
                         <div class="col-md-1">
-                            <?php $img_src = '/storage/seeker_images/seeker'.$application->seeker->user_id.'.png'; ?>
-                            @if(file_exists(public_path($img_src)))
-                                <img style="width:80px;height:80px;margin:0 auto;display:block;" src="{{$img_src}}?={{ File::lastModified(public_path().'/'.$img_src) }}">
+                            <?php
+                            $img_src_png = '/storage/company_images/company'.$application->seeker->user_id.'.png';
+                            $img_src_jpg = '/storage/company_images/company'.$application->seeker->user_id.'.jpg';
+                            ?>
+                            @if(file_exists(public_path($img_src_png)))
+                                <img style="width:80px;height:80px;margin:0 auto;display:block;" src="{{$img_src_png}}?={{ File::lastModified(public_path().'/'.$img_src_png) }}">
+                            @elseif(file_exists(public_path($img_src_jpg)))
+                                <img style="width:80px;height:80px;margin:0 auto;display:block;" src="{{$img_src_jpg}}?={{ File::lastModified(public_path().'/'.$img_src_jpg) }}">
                             @else
                                 <img style='width:80px;height:80px;margin:0 auto;display:block;' src='/storage/seeker_images/noimage.png'>
                             @endif

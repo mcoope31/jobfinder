@@ -403,19 +403,63 @@ class ProfileController extends Controller
         
         return redirect('/profile/'.$user_id.'/edit_education');
     }
-    
+
     public function account($user_id)
     {
         if(auth()->user()->id != $user_id || auth()->user()->user_type > 2)
             return back();
-        
-        if(auth()->user()->user_type == 1)
+
+        return view('pages.account', compact('user_id'));
+    }
+
+    public function edit_account($user_id)
+    {
+        if(auth()->user()->id != $user_id || auth()->user()->user_type > 2)
+            return back();
+
+        return view('pages.account_edit', compact( 'user_id'));
+    }
+
+    public function update_account_email(Request $request, $user_id)
+    {
+        if(auth()->user()->id != $user_id || auth()->user()->user_type > 2)
+            return back();
+
+        //VALIDATE
+        $request->validate([
+            'email' => 'nullable|email',
+        ]);
+
+        $user = User::find($user_id);
+        if(isset($request->email)) $user->email = $request->email;
+        $user->save();
+
+        return redirect('/profile/'.$user_id.'/account');
+    }
+
+    public function update_account_password(Request $request, $user_id)
+    {
+        if(auth()->user()->id != $user_id || auth()->user()->user_type > 2)
+            return back();
+
+        //VALIDATE
+        $request->validate([
+            'current_password' => 'required|string',
+            'new_password' => 'required|string|min:6|confirmed',
+        ]);
+
+        $user = User::find($user_id);
+
+        //AUTHENTICATE
+        if(!auth()->attempt(['email' => $request->email, 'password' => $request->current_password]))
         {
-            return view('seeker.account');
-        }
-        else
-        {
-            return view('company.account');
-        }
+            return back()->withErrors([
+                'message' => 'Please enter your current password and try again.'
+            ]);
+        } elseif(isset($request->new_password)) $user->password = bcrypt($request->new_password);
+
+        $user->save();
+
+        return redirect('/profile/'.$user_id.'/account');
     }
 }

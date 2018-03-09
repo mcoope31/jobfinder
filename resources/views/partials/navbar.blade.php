@@ -34,16 +34,26 @@
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             
                             @if(auth()->user()->user_type == 1)
-                                <?php $img_src = '/storage/seeker_images/seeker'.auth()->user()->id.'.png'; ?>
-                                @if(file_exists(public_path($img_src)))
-                                    <img class="rounded-circle" style="width:40px;height:40px;padding-top:0px;padding-bottom:0px;" src="{{$img_src}}?={{ File::lastModified(public_path().'/'.$img_src) }}">
+                                <?php
+                                $img_src_png = '/storage/seeker_images/seeker'.auth()->user()->id.'.png';
+                                $img_src_jpg = '/storage/seeker_images/seeker'.auth()->user()->id.'.jpg';
+                                ?>
+                                @if(file_exists(public_path($img_src_png)))
+                                    <img class="rounded-circle" style="width:40px;height:40px;padding-top:0px;padding-bottom:0px;" src="{{$img_src_png}}?={{ File::lastModified(public_path().'/'.$img_src_png) }}">
+                                @elseif(file_exists(public_path($img_src_jpg)))
+                                    <img class="rounded-circle" style="width:40px;height:40px;padding-top:0px;padding-bottom:0px;" src="{{$img_src_jpg}}?={{ File::lastModified(public_path().'/'.$img_src_jpg) }}">
                                 @else
                                     <img class="rounded-circle" style="width:40px;height:40px;padding-top:0px;padding-bottom:0px;" src='/storage/seeker_images/noimage.png'>
                                 @endif
                             @elseif(auth()->user()->user_type == 2)
-                                <?php $img_src = '/storage/company_images/company'.auth()->user()->id.'.png'; ?>
-                                @if(file_exists(public_path($img_src)))
-                                    <img class="rounded-circle" style="width:40px;height:40px;padding-top:0px;padding-bottom:0px;" src="{{$img_src}}?={{ File::lastModified(public_path().'/'.$img_src) }}">
+                                <?php
+                                $img_src_png = '/storage/company_images/company'.auth()->user()->id.'.png';
+                                $img_src_jpg = '/storage/company_images/company'.auth()->user()->id.'.jpg';
+                                ?>
+                                @if(file_exists(public_path($img_src_png)))
+                                    <img class="rounded-circle" style="width:40px;height:40px;padding-top:0px;padding-bottom:0px;" src="{{$img_src_png}}?={{ File::lastModified(public_path().'/'.$img_src_png) }}">
+                                @elseif(file_exists(public_path($img_src_jpg)))
+                                    <img class="rounded-circle" style="width:40px;height:40px;padding-top:0px;padding-bottom:0px;" src="{{$img_src_jpg}}?={{ File::lastModified(public_path().'/'.$img_src_jpg) }}">
                                 @else
                                     <img class="rounded-circle" style="width:40px;height:40px;padding-top:0px;padding-bottom:0px;" src='/storage/company_images/noimage.png'>
                                 @endif
