@@ -13,7 +13,8 @@ class PageController extends Controller
     {
         $new_jobs = JobOpening::latest()->limit(5)->get();
         $new_seekers = Seeker::latest()->limit(5)->get();
-        return view('pages.index', compact('new_jobs','new_seekers'));
+        $new_companies = Company::latest()->limit(5)->get();
+        return view('pages.index', compact('new_jobs','new_seekers', 'new_companies'));
     }
     
     public function companies()

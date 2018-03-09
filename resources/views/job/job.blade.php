@@ -28,18 +28,18 @@
             @else
                 <img style='width:250px;height:250px;' src='/storage/company_images/noimage.png'>
             @endif
-            
+
             <a href="{{ url('/profile/'.$job->company_id) }}" class="btn btn-primary btn-block" style="margin-top:10px;">View Company</a>
         </div>
         <div class="col-md-9">
-            
+
             <p style="font-size:2em;">
                 {{ $job->title }}
                 <span class="float-right badge badge-primary" style="font-size:0.5em;">Created: {{ $job->created_at->diffForHumans() }}</span>
             </p>
             <p style="font-size:1.5em;">
                 <span class="badge badge-secondary">{{ $job->type }}</span>
-                <span class="badge badge-secondary">Education: 
+                <span class="badge badge-secondary">Education:
                     @if($job->education == 0)
                         Not Necessary
                     @else
@@ -66,7 +66,7 @@
                 <strong>Company: </strong> {{ $job->company->name }}
             </p>
             <p>
-                <strong>Location: </strong> 
+                <strong>Location: </strong>
                 @if(!empty($job->company->city) && !empty($job->company->state))
                     {{ $job->company->city }}, {{ $job->company->state }} {{ $job->company->zipcode }}
                 @else
@@ -74,7 +74,7 @@
                 @endif
             </p>
             <p>
-                <strong>Contact Email: </strong> 
+                <strong>Contact Email: </strong>
                 @if(empty($job->company->contact_email))
                     {{ $job->company->user->email }}
                 @else
@@ -82,7 +82,7 @@
                 @endif
             </p>
             <p>
-                <strong>Phone: </strong> 
+                <strong>Phone: </strong>
                 @if(!empty($job->company->phone))
                     {{ $job->company->phone }}
                 @else
@@ -93,7 +93,7 @@
     </div>
     <hr>
     <div class="row">
-        
+
         <div class="col-md-6">
             <div class="form-group">
                 <a href="{{ URL::previous() }}" class="btn btn-danger btn-block">Back</a>
@@ -108,9 +108,13 @@
                 @else
                     <h3><span class="badge badge-success pull-right">You have applied to this Job!</span></h3>
                 @endif
+            @elseif(!auth()->check())
+                <div class="form-group">
+                    <a href="{{ url('/login') }}" class="btn btn-success btn-block">Sign up to Apply</a>
+                </div>
             @endif
         </div>
-        
+
     </div>
 
 @endsection
