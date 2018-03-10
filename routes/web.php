@@ -108,6 +108,10 @@ Route::get('/admin/all_users', 'AdminController@all_users');
 
 Route::get('/admin/seekers', 'AdminController@seekers');
 
+Route::post('/admin/{user_id}/freeze', 'AdminController@freeze');
+
+Route::post('/admin/{user_id}/unfreeze', 'AdminController@unfreeze');
+
 Route::get('/admin/companies', 'AdminController@companies');
 
 Route::get('/admin/job_openings', 'AdminController@job_openings');

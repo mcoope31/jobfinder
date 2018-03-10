@@ -106,9 +106,10 @@ class ProfileController extends Controller
         {
             //VALIDATE
             $request->validate([
-                'name' => 'required|alpha_dash|min:1|max:100',
+                'name' => 'required|regex:/^[\pL\s\-]+$/u|min:1|max:100',
                 'age' => 'required|numeric|min:16',
-                'city' => 'required|alpha_dash|min:3|max:100',
+                'city' => 'required|regex:/^[\pL\s\-]+$/u|min:3|max:100',
+                'phone' => 'regex:/^\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}$/u',
                 'state' => 'required|alpha|min:3|max:100',
                 'zip' => 'required|numeric|digits:5'
             ]);
@@ -123,7 +124,11 @@ class ProfileController extends Controller
             $seeker = Seeker::find($user_id);
             $seeker->name = $request->name;
             if(isset($request->age)) $seeker->age = $request->age;
-            if(isset($request->phone)) $seeker->phone = $request->phone;
+            if(isset($request->phone))
+            {
+                $phone = localize_us_number($request->phone);
+                $seeker->phone = $phone;
+            }
             if(isset($request->city)) $seeker->city = $request->city;
             if(isset($request->state)) $seeker->state = $request->state;
             if(isset($request->zip)) $seeker->zipcode = $request->zip;
@@ -136,13 +141,13 @@ class ProfileController extends Controller
                 'name' => 'required|min:1|max:100',
                 'industry' => 'required',
                 'description' => 'required|min:1|max:1000',
-                'phone' => 'required|digits:10',
+                'phone' => 'required|regex:/^\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}$/u',
                 'contact_email' => 'nullable|email|unique:email',
                 'founded' => 'required|digits:4',
                 'company_size' => 'required|numeric|min:1',
-                'city' => 'required|alpha_dash|min:1|max:100',
+                'city' => 'required|regex:/^[\pL\s\-]+$/u|min:1|max:100',
                 'state' => 'required|alpha|min:1|max:100',
-                'zip' => 'required|digits:6',
+                'zip' => 'required|digits:5',
                 'website' => 'nullable|URL|max:100'
             ]);
             
@@ -157,7 +162,11 @@ class ProfileController extends Controller
             $company->name = $request->name;
             if(isset($request->industry)) $company->industry = $request->industry;
             if(isset($request->description)) $company->description = $request->description;
-            if(isset($request->phone)) $company->phone = $request->phone;
+            if(isset($request->phone))
+            {
+                $phone = localize_us_number($request->phone);
+                $company->phone = $phone;
+            }
             if(isset($request->contact_email)) $company->contact_email = $request->contact_email;
             $company->founded = $request->founded;
             $company->size = $request->company_size;

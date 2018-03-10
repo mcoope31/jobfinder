@@ -4,6 +4,9 @@
 
     <h2>Seekers - Admin</h2>
     <hr>
+    @if(Session::has('freeze'))
+        <div class="alert alert-success">{{ Session::get('freeze') }}</div>
+    @endif
     <div class="row">
         <div class="col-md-12">
             <ul class="list-group">
@@ -45,8 +48,20 @@
                             <div class="col-md-2">
                                 <a href="{{ url('/profile/'.$seeker->user_id) }}" class="btn btn-sm btn-primary btn-block mt-1 mb-1">View</a>
                                 <div class="btn-group" style="width:100%;" role="group">
-                                    <a href="" class="btn btn-sm btn-warning" style="width:50%;">Freeze</a>
-                                    <a href="" class="btn btn-sm btn-danger" style="width:50%;">Delete</a>
+                                    @if($seeker->user->status == 0)
+                                        <form style="width:50%;" method="POST" action="{{ url('/admin/'.$seeker->user_id.'/freeze') }}">
+                                            {{ csrf_field() }}
+                                            <button type="submit" class="btn btn-sm btn-warning" style="width:100%;" value="Freeze">Freeze</button>
+                                        </form>
+                                    @elseif($seeker->user->status == 1)
+                                        <form style="width:50%;" method="POST" action="{{ url('/admin/'.$seeker->user_id.'/unfreeze') }}">
+                                            {{ csrf_field() }}
+                                            <button type="submit" class="btn btn-sm btn-warning" style="width:100%;" value="Freeze">Unfreeze</button>
+                                        </form>
+                                    @endif
+                                    <form style="width:50%;" method="POST" action="">
+                                        <button type="submit" class="btn btn-sm btn-danger" style="width:100%;" value="Freeze">Delete</button>
+                                    </form>
                                 </div>
                             </div>
                             <div class="col-md-10">

@@ -13,9 +13,9 @@
                     @foreach($new_seekers as $seeker)
                         <li class="list-group-item">
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-3">            
                                     <?php
-                                    $img_src_png = '/storage/seeker_images/company'.$seeker->user_id.'.png';
+                                    $img_src_png = '/storage/seeker_images/seeker'.$seeker->user_id.'.png';
                                     $img_src_jpg = '/storage/seeker_images/seeker'.$seeker->user_id.'.jpg';
                                     ?>
                                     @if(file_exists(public_path($img_src_png)))

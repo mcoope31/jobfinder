@@ -4,6 +4,9 @@
 
     <h2>Companies - Admin</h2>
     <hr>
+    @if(Session::has('freeze'))
+        <div class="alert alert-success">{{ Session::get('freeze') }}</div>
+    @endif
     <div class="row">
         <div class="col-md-12">
             @foreach($companies as $company)
@@ -29,7 +32,18 @@
                                     <img style='width:120px;height:120px;margin:0 auto;display:block;' src='/storage/company_images/noimage.png'>
                                 @endif
                                 <a href="{{ url('/companies/'.$company->user_id) }}" class="btn btn-sm btn-primary btn-block">View Company</a>
-                                <a href="" class="btn btn-sm btn-outline-warning btn-block">Freeze Account</a>
+                                
+                                @if($company->user->status == 0)
+                                    <form method="POST" action="{{ url('/admin/'.$company->user_id.'/freeze') }}">
+                                        {{ csrf_field() }}
+                                        <button type="submit" class="btn btn-sm btn-outline-warning btn-block mt-1 mb-1" value="Freeze">Freeze Account</button>
+                                    </form>
+                                @elseif($company->user->status == 1)
+                                    <form method="POST" action="{{ url('/admin/'.$company->user_id.'/unfreeze') }}">
+                                        {{ csrf_field() }}
+                                        <button type="submit" class="btn btn-sm btn-outline-warning btn-block mt-1 mb-1" value="Freeze">Unfreeze Account</button>
+                                    </form>
+                                @endif
                                 <a href="" class="btn btn-sm btn-outline-danger btn-block">Delete</a>
                             </div>
                             <div class="col-md-10">

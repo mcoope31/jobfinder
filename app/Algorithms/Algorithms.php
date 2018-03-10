@@ -172,3 +172,9 @@ function checkExperience($job, $seeker)
     }
     return $meets_experience;
 }
+
+function localize_us_number($phone) 
+{
+  $numbers_only = preg_replace("/[^\d]/", "", $phone);
+  return preg_replace("/^1?(\d{3})(\d{3})(\d{4})$/", "$1-$2-$3", $numbers_only);
+}

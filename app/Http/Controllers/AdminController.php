@@ -107,4 +107,32 @@ class AdminController extends Controller
         
         return view('admin.algorithms', compact('seekers', 'suggestedJobs', 'time'));
     }
+    
+    public function freeze($user_id)
+    {
+        if(auth()->user()->user_type != 3)
+            return back();
+        
+        $user = User::find($user_id);
+        $user->status = 1;
+        $user->save();
+        
+        \Session::flash('freeze', "User ".$user->type->name."'s account has been frozen.");
+        
+        return back();
+    }
+    
+    public function unfreeze($user_id)
+    {
+        if(auth()->user()->user_type != 3)
+            return back();
+        
+        $user = User::find($user_id);
+        $user->status = 0;
+        $user->save();
+        
+        \Session::flash('freeze', "User ".$user->type->name."'s account has been unfrozen.");
+        
+        return back();
+    }
 }

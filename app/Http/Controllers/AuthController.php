@@ -21,13 +21,16 @@ class AuthController extends Controller
     
     public function login()
     {
+        $user = User::where('email',request()->email)->first();
+        if(count($user)==1 && $user->status==1)
+            return back()->withErrors(['message' => 'Your account is currently frozen.']);
+        
         if(!auth()->attempt(request(['email','password'])))
         {
             return back()->withErrors([
                'message' => 'Please check your credentials and try again.' 
             ]);
         }
-        
 
         if(auth()->user()->user_type == 1)
         {
