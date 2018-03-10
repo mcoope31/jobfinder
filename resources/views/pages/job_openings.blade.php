@@ -107,6 +107,7 @@
                     </div>
                     <div class="card-footer">
                         <a href="{{ url('/job/'.$job->id) }}" class="btn btn-sm btn-primary pull-right">View Job</a>
+                        <a href="{{ url($job->id.'/report_job') }}" class="pull-right btn btn-sm btn-danger">Report Job</a>
                         <h5><span class="badge badge-secondary"><strong>Openings: </strong>{{ $job->openings }}</span></h5>
                     </div>
                 </div>

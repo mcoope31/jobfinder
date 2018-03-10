@@ -75,6 +75,7 @@
                     N/A
                 @endif
             </p>
+            <a href="{{ url($info->user_id.'/report_user') }}" class="pull-right btn btn-sm btn-danger">Report Company</a>
         </div>
     </div>
     <hr>

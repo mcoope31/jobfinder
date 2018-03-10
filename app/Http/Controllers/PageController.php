@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ReportMessage;
 use App\Mail\ContactMessage;
 use Illuminate\Http\Request;
 use App\Company;
 use App\JobOpening;
 use App\Seeker;
+use App\User;
 use Illuminate\Support\Facades\Mail;
 
 class PageController extends Controller
@@ -91,6 +93,29 @@ class PageController extends Controller
         return view('pages.contact');
     }
 
+    public function report_user($user_id)
+    {
+        $info=User::find($user_id);
+        return view('pages.report_user',compact('info','user_id'));
+    }
+    public function report_job($job_id)
+    {
+        $info=JobOpening::find($job_id);
+        return view('pages.report_job',compact('info','job_id'));
+    }
+
+    public function report_user_sent(Request $request, $user_id)
+    {
+        Mail::send(new ReportMessage($request, $user_id, 'user'));
+        return view('pages.report_sent');
+    }
+
+    public function report_job_sent(Request $request, $job_id)
+    {
+        Mail::send(new ReportMessage($request, $job_id, 'job'));
+        return view('pages.report_sent');
+    }
+  
     public function contact_sent(Request $request)
     {
         Mail::send(new ContactMessage($request));
