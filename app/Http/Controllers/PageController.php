@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMessage;
 use Illuminate\Http\Request;
 use App\Company;
 use App\JobOpening;
 use App\Seeker;
+use Illuminate\Support\Facades\Mail;
 
 class PageController extends Controller
 {
@@ -87,5 +89,11 @@ class PageController extends Controller
     public function contact()
     {
         return view('pages.contact');
+    }
+
+    public function contact_sent(Request $request)
+    {
+        Mail::send(new ContactMessage($request));
+        return view('pages.contact_sent');
     }
 }
