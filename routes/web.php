@@ -24,6 +24,8 @@ Route::get('/about', 'PageController@about');
 
 Route::get('/contact', 'PageController@contact');
 
+Route::patch('/contact_sent', 'PageController@contact_sent');
+
 
 /*
  *      PROFILE ROUTES
