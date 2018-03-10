@@ -24,6 +24,14 @@ Route::get('/about', 'PageController@about');
 
 Route::get('/contact', 'PageController@contact');
 
+Route::get('/{user_id}/report_user', 'PageController@report_user');
+
+Route::get('/{job_id}/report_job', 'PageController@report_job');
+
+Route::patch('{user_id}/report_user_sent', 'PageController@report_user_sent');
+
+Route::patch('{job_id}/report_job_sent', 'PageController@report_job_sent');
+
 
 /*
  *      PROFILE ROUTES

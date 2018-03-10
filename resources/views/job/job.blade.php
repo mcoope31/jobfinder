@@ -89,6 +89,7 @@
                     N/A
                 @endif
             </p>
+            <a href="{{ url($job->id.'/report_job') }}" class="pull-right btn btn-sm btn-danger">Report Job</a>
         </div>
     </div>
     <hr>

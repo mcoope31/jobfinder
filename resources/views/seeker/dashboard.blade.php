@@ -10,6 +10,15 @@
                     <strong>Info</strong>
                 </div>
                 <div class="card-body">
+                    <p>
+                        There are <strong>{{ App\JobOpening::all()->count() }}</strong> Job Openings listed!
+                    </p>
+                    <p>
+                        There are <strong>{{ App\Company::all()->count() }}</strong> Companies registered!
+                    </p>
+                    <p>
+                        There are <strong>{{ App\Seeker::all()->count() }}</strong> Job Seekers registered!
+                    </p>
                     <p><strong>Applications Submitted: </strong>{{ count(auth()->user()->type->applications) }}</p>
                 </div>
             </div>
@@ -30,7 +39,10 @@
                         <div class="alert alert-warning">You have not applied to any jobs yet!</div>
                     @endif
                     <ul class="list-group">
+                        <?php $x=0; ?>
                         @foreach(auth()->user()->type->applications as $application)
+                            <?php if($x == 5) break; ?>
+                            <?php $x++; ?>
                             <li class="list-group-item">
                                 <strong>{{ $application->job->title }}</strong> at {{ $application->job->company->name }}
                                 <span class="badge badge-secondary badge-pill pull-right">{{ $application->created_at->diffForHumans() }}</span>
@@ -45,13 +57,18 @@
             <div class="card">
                 <div class="card-header bg-dark text-white">
                     <strong>Suggested Jobs</strong>
+                    <a href="/job_openings" class="btn btn-sm btn-primary pull-right">View All</a>
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
+                    <?php $y=0; ?>
                     @foreach($suggestedJobs as $key => $val)
                         <?php $job = App\JobOpening::find($key) ?>
                         <?php $app = auth()->user()->type->application(auth()->user()->id,$job->id) ?>
+                        <?php if($y == 5) break; ?>
+                        <?php $y++; ?>
                         @if(isset($app) && count($app)==0)
+                            <?php $y++; ?>
                             <li class="list-group-item">
                                 <div class="row">
                                     <div class="col-md-3">

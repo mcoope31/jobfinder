@@ -95,6 +95,7 @@
                     </div>
                     <div class="card-footer">
                         <a href="{{ url('/profile/'.$company->user_id) }}" class="btn btn-sm btn-primary pull-right">View Company</a>
+                        <a href="{{ url($company->user_id.'/report_user') }}" class="btn btn-sm btn-danger pull-right">Report Company</a>
                         <strong>Job Openings: </strong>
                         @if(Session::has('order') && Session::get('order')=='Job Openings')
                             {{ $company->job_openings }}

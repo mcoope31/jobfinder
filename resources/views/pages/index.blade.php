@@ -19,8 +19,9 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="jumbotron">
-                <h1 class="text-center">Welcome to JobFinder</h1>
+            <div class="jumbotron" style="background: url(https://www.planwallpaper.com/static/images/518151-backgrounds_W3qVPu2.jpg) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+
+                <h1 class="text-center"><font color="white">Welcome to JobFinder</font></h1>
                 @if(!auth()->check())
                     <a href="{{ url('/login') }}" class="btn btn-lg btn-primary pull-right">Sign up Now!</a>
                 @endif

@@ -11,7 +11,15 @@
                     <h4>General Info</h4>
                 </div>
                 <div class="card-body">
-                    
+                    <p>
+                        There are <strong>{{ App\JobOpening::all()->count() }}</strong> Job Openings listed!
+                    </p>
+                    <p>
+                        There are <strong>{{ App\Company::all()->count() }}</strong> Companies registered!
+                    </p>
+                    <p>
+                        There are <strong>{{ App\Seeker::all()->count() }}</strong> Job Seekers registered!
+                    </p>
                 </div>
             </div>
         </div>
