@@ -4,6 +4,9 @@
 
     <h2>Job Openings - Admin</h2>
     <hr>
+    @if(Session::has('delete'))
+        <div class="alert alert-warning">{{ Session::get('delete') }}</div>
+    @endif
     <div class="row">
         <div class="col-md-12">
             @foreach($jobs as $job)
@@ -34,7 +37,11 @@
                             @endif
                         </h3>
                         <h4>
-                            <a href="" class="btn btn-sm btn-danger pull-right">Delete</a>
+                            <form method="POST" action="{{ url('/admin/'.$job->id.'/delete_job') }}">
+                                {{ csrf_field() }}
+                                <button type="submit" class="btn btn-sm btn-danger pull-right">Delete</button>
+                            </form>
+
                             <a href="{{ url('/job/'.$job->id) }}" class="btn btn-sm btn-primary pull-right mr-1">View Job</a>
                             <span class="badge badge-secondary">{{ $job->type }}</span>
                             <span class="badge badge-secondary">{{ $job->openings }} Openings</span>

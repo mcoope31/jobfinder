@@ -68,6 +68,8 @@ Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 Route::get('/applications', 'DashboardController@applications');
 
+Route::post('/application/{application_id}/delete', 'DashboardController@delete_application');
+
 Route::get('/company_jobs', 'DashboardController@company_jobs');
 
 
@@ -112,10 +114,16 @@ Route::post('/admin/{user_id}/freeze', 'AdminController@freeze');
 
 Route::post('/admin/{user_id}/unfreeze', 'AdminController@unfreeze');
 
+Route::post('/admin/{user_id}/delete_user', 'AdminController@delete_user');
+
 Route::get('/admin/companies', 'AdminController@companies');
 
 Route::get('/admin/job_openings', 'AdminController@job_openings');
 
+Route::post('/admin/{job_id}/delete_job', 'AdminController@delete_job');
+
 Route::get('/admin/applications', 'AdminController@applications');
+
+Route::post('/admin/{application_id}/delete_application', 'AdminController@delete_application');
 
 Route::get('/admin/algorithms', 'AdminController@algorithms');

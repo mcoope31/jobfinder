@@ -9,6 +9,10 @@ use App\Seeker;
 use App\Company;
 use App\JobOpening;
 use App\Application;
+use App\SeekerEducation;
+use App\SeekerExperience;
+use App\SeekerSkill;
+use App\JobSkill;
 
 class AdminController extends Controller
 {
@@ -132,6 +136,73 @@ class AdminController extends Controller
         $user->save();
         
         \Session::flash('freeze', "User ".$user->type->name."'s account has been unfrozen.");
+        
+        return back();
+    }
+    
+    public function delete_user($user_id)
+    {
+        if(auth()->user()->user_type != 3)
+            return back();
+        
+        $user = User::find($user_id);
+        $username=$user->type->name;
+        if($user->user_type == 1) //Seeker
+        {
+            Application::where('seeker_id',$user_id)->delete();
+            SeekerEducation::where('seeker_id',$user_id)->delete();
+            SeekerExperience::where('seeker_id',$user_id)->delete();
+            SeekerSkill::where('seeker_id',$user_id)->delete();
+            Seeker::where('user_id',$user_id)->delete();
+        }
+        else if($user->user_type == 2) //Company
+        {
+            $jobs = JobOpening::where('company_id',$user_id)->get();
+            foreach($jobs as $job)
+            {
+                Application::where('job_id',$job->id)->delete();
+                JobSkill::where('job_id',$job->id)->delete();
+            }
+            
+            JobOpening::where('company_id',$user_id)->delete();
+            Company::where('user_id',$user_id)->delete();
+        }
+        else
+        {
+            
+        }
+        
+        User::where('id',$user_id)->delete();
+        
+        \Session::flash('delete', "User ".$username." has been deleted.");
+        
+        return back();
+    }
+    
+    public function delete_job($job_id)
+    {
+        if(auth()->user()->user_type != 3)
+            return back();
+        
+        $job = JobOpening::find($job_id);
+        $job_title = $job->title;
+        Application::where('job_id',$job->id)->delete();
+        JobSkill::where('job_id',$job->id)->delete();
+        JobOpening::where('id',$job_id)->delete();
+        
+        \Session::flash('delete', "Job '".$job_title."' has been deleted.");
+        
+        return back();
+    }
+    
+    public function delete_application($application_id)
+    {
+        if(auth()->user()->user_type != 3)
+            return back();
+        
+        Application::where('id',$application_id)->delete();
+        
+        \Session::flash('delete', "Application has been deleted.");
         
         return back();
     }

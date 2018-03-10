@@ -4,6 +4,9 @@
 
     <h1 class="text-center">Your Applications</h1>
     <hr>
+    @if(Session::has('delete'))
+        <div class="alert alert-warning">{{ Session::get('delete') }}</div>
+    @endif
     <div class="row">
         <div class="col-md-12">
         
@@ -38,7 +41,10 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a href="" class="btn btn-md btn-danger pull-right ml-1">Remove Application</a>
+                        <form method="POST" action="{{ url('/application/'.$application->id.'/delete') }}">
+                            {{ csrf_field() }}
+                            <button type="submit" class="btn btn-md btn-danger pull-right ml-1">Remove Application</button>
+                        </form>
                         <a href="{{ url('/job/'.$application->job->id) }}" class="btn btn-md btn-primary pull-right">View Job</a>
                         <strong>Openings: </strong>{{ $application->job->openings }}
                     </div>

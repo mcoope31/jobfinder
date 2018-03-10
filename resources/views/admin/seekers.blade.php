@@ -6,6 +6,8 @@
     <hr>
     @if(Session::has('freeze'))
         <div class="alert alert-success">{{ Session::get('freeze') }}</div>
+    @elseif(Session::has('delete'))
+        <div class="alert alert-warning">{{ Session::get('delete') }}</div>
     @endif
     <div class="row">
         <div class="col-md-12">
@@ -51,16 +53,17 @@
                                     @if($seeker->user->status == 0)
                                         <form style="width:50%;" method="POST" action="{{ url('/admin/'.$seeker->user_id.'/freeze') }}">
                                             {{ csrf_field() }}
-                                            <button type="submit" class="btn btn-sm btn-warning" style="width:100%;" value="Freeze">Freeze</button>
+                                            <button type="submit" class="btn btn-sm btn-warning" style="width:100%;">Freeze</button>
                                         </form>
                                     @elseif($seeker->user->status == 1)
                                         <form style="width:50%;" method="POST" action="{{ url('/admin/'.$seeker->user_id.'/unfreeze') }}">
                                             {{ csrf_field() }}
-                                            <button type="submit" class="btn btn-sm btn-warning" style="width:100%;" value="Freeze">Unfreeze</button>
+                                            <button type="submit" class="btn btn-sm btn-warning" style="width:100%;">Unfreeze</button>
                                         </form>
                                     @endif
-                                    <form style="width:50%;" method="POST" action="">
-                                        <button type="submit" class="btn btn-sm btn-danger" style="width:100%;" value="Freeze">Delete</button>
+                                    <form style="width:50%;" method="POST" action="{{ url('/admin/'.$seeker->user_id.'/delete_user') }}">
+                                        {{ csrf_field() }}
+                                        <button type="submit" class="btn btn-sm btn-danger" style="width:100%;">Delete</button>
                                     </form>
                                 </div>
                             </div>

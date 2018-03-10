@@ -6,6 +6,8 @@
     <hr>
     @if(Session::has('freeze'))
         <div class="alert alert-success">{{ Session::get('freeze') }}</div>
+    @elseif(Session::has('delete'))
+        <div class="alert alert-warning">{{ Session::get('delete') }}</div>
     @endif
     <div class="row">
         <div class="col-md-12">
@@ -31,20 +33,23 @@
                                 @else
                                     <img style='width:120px;height:120px;margin:0 auto;display:block;' src='/storage/company_images/noimage.png'>
                                 @endif
-                                <a href="{{ url('/companies/'.$company->user_id) }}" class="btn btn-sm btn-primary btn-block">View Company</a>
+                                <a href="{{ url('/profile/'.$company->user_id) }}" class="btn btn-sm btn-primary btn-block">View Company</a>
                                 
                                 @if($company->user->status == 0)
                                     <form method="POST" action="{{ url('/admin/'.$company->user_id.'/freeze') }}">
                                         {{ csrf_field() }}
-                                        <button type="submit" class="btn btn-sm btn-outline-warning btn-block mt-1 mb-1" value="Freeze">Freeze Account</button>
+                                        <button type="submit" class="btn btn-sm btn-outline-warning btn-block mt-1 mb-1">Freeze Account</button>
                                     </form>
                                 @elseif($company->user->status == 1)
                                     <form method="POST" action="{{ url('/admin/'.$company->user_id.'/unfreeze') }}">
                                         {{ csrf_field() }}
-                                        <button type="submit" class="btn btn-sm btn-outline-warning btn-block mt-1 mb-1" value="Freeze">Unfreeze Account</button>
+                                        <button type="submit" class="btn btn-sm btn-outline-warning btn-block mt-1 mb-1">Unfreeze Account</button>
                                     </form>
                                 @endif
-                                <a href="" class="btn btn-sm btn-outline-danger btn-block">Delete</a>
+                                <form method="POST" action="{{ url('/admin/'.$company->user_id.'/delete_user') }}">
+                                    {{ csrf_field() }}
+                                    <button type="submit" class="btn btn-sm btn-outline-danger btn-block">Delete</button>
+                                </form>
                             </div>
                             <div class="col-md-10">
                                 <h5>

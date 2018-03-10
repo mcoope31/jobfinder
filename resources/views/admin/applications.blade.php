@@ -4,6 +4,9 @@
 
     <h2>Applications - Admin</h2>
     <hr>
+    @if(Session::has('delete'))
+        <div class="alert alert-warning">{{ Session::get('delete') }}</div>
+    @endif
     <div class="row">
         <div class="col-md-12">
             <ul class="list-group">
@@ -12,8 +15,8 @@
                     <div class="row">
                         <div class="col-md-1">
                             <?php
-                            $img_src_png = '/storage/company_images/company'.$application->seeker->user_id.'.png';
-                            $img_src_jpg = '/storage/company_images/company'.$application->seeker->user_id.'.jpg';
+                            $img_src_png = '/storage/seeker_images/seeker'.$application->seeker->user_id.'.png';
+                            $img_src_jpg = '/storage/seeker_images/seeker'.$application->seeker->user_id.'.jpg';
                             ?>
                             @if(file_exists(public_path($img_src_png)))
                                 <img style="width:80px;height:80px;margin:0 auto;display:block;" src="{{$img_src_png}}?={{ File::lastModified(public_path().'/'.$img_src_png) }}">
@@ -38,7 +41,10 @@
                                 </p>
                             </h5>
                             <p class="mb-0">
-                                <a href="" class='btn btn-sm btn-danger pull-right'>Remove</a>
+                                <form method="POST" action="{{ url('/admin/'.$application->id.'/delete_application') }}">
+                                    {{ csrf_field() }}
+                                    <button type="submit" class="btn btn-sm btn-danger pull-right">Delete</button>
+                                </form>
                             </p>
                         </div>
                     </div>

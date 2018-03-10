@@ -43,7 +43,6 @@ class DashboardController extends Controller
             
             return view('admin.dashboard', compact('users', 'jobs'));
         }
-        
     }
     
     public function applications()
@@ -64,5 +63,25 @@ class DashboardController extends Controller
         
         $jobs = JobOpening::where('company_id',auth()->user()->id)->orderBy('created_at','desc')->get();
         return view('company.company_jobs', compact('jobs'));
+    }
+    
+    public function delete_application($application_id)
+    {
+        //Is a seeker
+        if(auth()->user()->user_type != 1)
+            return back();
+        
+        $app = Application::where('id',$application_id)->first();
+
+        if($app->seeker_id == auth()->user()->id)
+        {
+            Application::where('id',$application_id)->delete();
+            
+            \Session::flash('delete', "Application has been deleted.");
+        
+            return back();
+        }
+        else
+            return back();
     }
 }
