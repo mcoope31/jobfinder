@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ReportMessage;
+use App\Mail\ContactMessage;
 use Illuminate\Http\Request;
 use App\Company;
 use App\JobOpening;
@@ -113,5 +114,11 @@ class PageController extends Controller
     {
         Mail::send(new ReportMessage($request, $job_id, 'job'));
         return view('pages.report_sent');
+    }
+  
+    public function contact_sent(Request $request)
+    {
+        Mail::send(new ContactMessage($request));
+        return view('pages.contact_sent');
     }
 }

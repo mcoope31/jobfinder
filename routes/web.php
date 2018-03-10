@@ -32,6 +32,9 @@ Route::patch('{user_id}/report_user_sent', 'PageController@report_user_sent');
 
 Route::patch('{job_id}/report_job_sent', 'PageController@report_job_sent');
 
+Route::patch('/contact_sent', 'PageController@contact_sent');
+
+
 
 /*
  *      PROFILE ROUTES
