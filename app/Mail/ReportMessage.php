@@ -26,7 +26,7 @@ class ReportMessage extends Mailable
     public function __construct($request, $id, $type)
     {
         $this->name = $request->name;
-        if(isset($request->email)) $this->email = $request->email;
+        if(isset($request->email)) $this->email = env('MAIL_USERNAME','');//$request->email;
         $this->message = $request->message;
         $this->id = $id;
         $this->type = $type;

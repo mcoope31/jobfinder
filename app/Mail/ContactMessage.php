@@ -38,6 +38,6 @@ class ContactMessage extends Mailable
         $title = 'From '.$this->name.' '.$this->email;
         $content = $this->message;
         return $this->to(env('MAIL_USERNAME',''))->subject("Message from ".$this->name)
-            ->from($this->email)->view('emails.send',compact('title', 'content'));
+            ->from(env('MAIL_USERNAME',''))->view('emails.send',compact('title', 'content'));
     }
 }
