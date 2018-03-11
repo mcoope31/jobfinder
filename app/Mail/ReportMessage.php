@@ -27,7 +27,6 @@ class ReportMessage extends Mailable
     {
         $this->name = $request->name;
         if(isset($request->email)) $this->email = $request->email;
-        else $this->email = env('MAIL_USERNAME','');
         $this->message = $request->message;
         $this->id = $id;
         $this->type = $type;
@@ -43,7 +42,7 @@ class ReportMessage extends Mailable
         $title = 'Job #'.$this->id.' ('.$this->name.') has been reported';
         if($this->type == 'user') $title = 'User #'.$this->id.' ('.$this->name.', '.$this->email.') has been reported';
         $content = $this->message;
-        return $this->to(env('MAIL_USERNAME',''))->subject($this->name.' has been reported')->from($this->email)
+        return $this->to(env('MAIL_USERNAME',''))->subject($this->name.' has been reported')->from(env('MAIL_USERNAME',''))
             ->view('emails.send',compact('title', 'content'));
     }
 }
