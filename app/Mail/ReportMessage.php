@@ -42,7 +42,7 @@ class ReportMessage extends Mailable
         $title = 'Job #'.$this->id.' ('.$this->name.') has been reported';
         if($this->type == 'user') $title = 'User #'.$this->id.' ('.$this->name.', '.$this->email.') has been reported';
         $content = $this->message;
-        return $this->to("jobfinderCSC396@gmail.com")->subject($this->name.' has been reported')
+        return $this->to($_ENV['MAIL_USERNAME'])->subject($this->name.' has been reported')
             ->view('emails.send',compact('title', 'content'));
     }
 }
