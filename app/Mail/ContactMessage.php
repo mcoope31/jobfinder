@@ -37,7 +37,7 @@ class ContactMessage extends Mailable
     {
         $title = 'From '.$this->name.' '.$this->email;
         $content = $this->message;
-        return $this->to("jobfinderCSC396@gmail.com")->subject("Message from ".$this->name)
+        return $this->to(env('MAIL_USERNAME',''))->subject("Message from ".$this->name)
             ->from($this->email)->view('emails.send',compact('title', 'content'));
     }
 }
