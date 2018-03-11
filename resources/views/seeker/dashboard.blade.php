@@ -66,7 +66,6 @@
                         <?php $job = App\JobOpening::find($key) ?>
                         <?php $app = auth()->user()->type->application(auth()->user()->id,$job->id) ?>
                         <?php if($y == 5) break; ?>
-                        <?php $y++; ?>
                         @if(isset($app) && count($app)==0)
                             <?php $y++; ?>
                             <li class="list-group-item">
