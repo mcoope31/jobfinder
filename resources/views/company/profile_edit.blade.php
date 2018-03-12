@@ -77,8 +77,7 @@
                 <div class="form-group row">
                     <label for="description" class="col-sm-3 col-form-label">Description: </label>
                     <div class="col-sm-9">
-                        <textarea class="form-control" name="description" id="description" rows="5">{{ auth()->user()->type->description }}
-                        </textarea>
+                        <textarea class="form-control" name="description" id="description" rows="5">{{ auth()->user()->type->description }}</textarea>
                     </div>
                 </div>
                 

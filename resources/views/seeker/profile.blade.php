@@ -57,7 +57,10 @@
                     N/A
                 @endif
             </p>
-            <a href="{{ url($info->user_id.'/report_user') }}" class="pull-right btn btn-sm btn-danger">Report Job Seeker</a>
+            @if(auth()->check() && $info->user_id == auth()->user()->id)
+            @else
+                <a href="{{ url($info->user_id.'/report_user') }}" class="pull-right btn btn-sm btn-danger">Report Job Seeker</a>
+            @endif
         </div>
     </div>
     <hr>

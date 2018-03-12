@@ -110,7 +110,7 @@ class ProfileController extends Controller
                 'age' => 'required|numeric|min:16',
                 'city' => 'required|regex:/^[\pL\s\-]+$/u|min:3|max:100',
                 'phone' => 'regex:/^\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}$/u',
-                'state' => 'required|alpha|min:3|max:100',
+                'state' => 'required|regex:/^[\pL\s\-]+$/u|min:3|max:100',
                 'zip' => 'required|numeric|digits:5'
             ]);
             
@@ -146,7 +146,7 @@ class ProfileController extends Controller
                 'founded' => 'required|digits:4',
                 'company_size' => 'required|numeric|min:1',
                 'city' => 'required|regex:/^[\pL\s\-]+$/u|min:1|max:100',
-                'state' => 'required|alpha|min:1|max:100',
+                'state' => 'required|regex:/^[\pL\s\-]+$/u|min:1|max:100',
                 'zip' => 'required|digits:5',
                 'website' => 'nullable|URL|max:100'
             ]);
@@ -172,7 +172,7 @@ class ProfileController extends Controller
             $company->size = $request->company_size;
             if(isset($request->city)) $company->city = $request->city;
             if(isset($request->state)) $company->state = $request->state;
-            if(isset($request->zipcode)) $company->zipcode = $request->zip;
+            if(isset($request->zip)) $company->zipcode = $request->zip;
             if(isset($request->website)) $company->website = $request->website;
             $company->save();
         }
