@@ -110,8 +110,8 @@
                         <div class="row">
                             <div class="col-md-2">
                                 <?php
-                                $img_src_png = '/storage/seeker_images/seeker'.$seeker->user_id.'.png';
-                                $img_src_jpg = '/storage/seeker_images/seeker'.$seeker->user_id.'.jpg';
+                                $img_src_png = '/storage/seeker_images/seeker'.$application->seeker_id.'.png';
+                                $img_src_jpg = '/storage/seeker_images/seeker'.$application->seeker_id.'.jpg';
                                 ?>
                                 @if(file_exists(public_path($img_src_png)))
                                     <img style="width:150px;height:150px;" id='img-upload' src="{{$img_src_png}}?={{ File::lastModified(public_path().'/'.$img_src_png) }}">
