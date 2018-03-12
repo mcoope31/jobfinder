@@ -78,7 +78,7 @@ class PageController extends Controller
                 ]);
         }
         else
-            $jobs = JobOpening::orderBy('created_at', 'desc')->paginate(5);
+            $jobs = JobOpening::where('status',0)->orderBy('created_at', 'desc')->paginate(5);
         
         return view('pages.job_openings', compact('jobs'));
     }
