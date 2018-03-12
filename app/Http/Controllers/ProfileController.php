@@ -142,7 +142,7 @@ class ProfileController extends Controller
                 'industry' => 'required',
                 'description' => 'required|min:1|max:1000',
                 'phone' => 'required|regex:/^\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}$/u',
-                'contact_email' => 'nullable|email|unique:email',
+                'contact_email' => 'nullable|email',
                 'founded' => 'required|digits:4',
                 'company_size' => 'required|numeric|min:1',
                 'city' => 'required|regex:/^[\pL\s\-]+$/u|min:1|max:100',
